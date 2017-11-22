@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int random(int b[]) //定义1~52的随机排列  
+{
+	 int i,j,flag,num;
+	 srand((unsigned)time(NULL));
+	 for(i = 0; i < 52; ++i) 
+	 {
+		  num = rand()%52 + 1;
+		  flag = 1;
+		  for(j = 0; j < i; ++j) 
+		  {
+			   if(num == b[j]) 
+			   {
+				    flag = 0;;
+				    break;
+			   }
+		  }
+		  if(flag) b[i] = num;
+		  else --i;
+	 }
+	 return 0;
+}
+int main(){
+	int a[4][13];//表示发给四个人a,,b,c,d,每人13张牌 
+	int b[52];
+	random(b);
+	int i,j,x=0;
+	printf("玩家a\t玩家b\t玩家c\t玩家d\n");
+	for(i=0;i<4;i++,x){
+		for(j=0;j<13;j++){
+			a[i][j]=b[x];
+			x++;//让二维数组与随机数组对应 
+			printf("%d\t",a[i][j]);//输出每个玩家的13张手牌 
+		}
+		printf("\n");
+	}
+	return 0;
+}
